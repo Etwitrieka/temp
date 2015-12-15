@@ -1,7 +1,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix stmeteo: <http://www.stmeteo.com#> .
+@prefix stmeteo: <https://raw.githubusercontent.com/Etwitrieka/temp/master/fp0#> .
 @prefix dbpedia-id:<http://id.dbpedia.org/resource/> .
 @prefix qb: <http://purl.org/linked-data/cube#> .
 @prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
