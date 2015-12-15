@@ -1,0 +1,400 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix stmeteo: <http://www.stmeteo.com#> .
+@prefix dbpedia-id:<http://id.dbpedia.org/resource/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> .
+@prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#> .
+
+stmeteo:KelasStasiun a rdfs:Class .
+stmeteo:I a stmeteo:KelasStasiun .
+stmeteo:II a stmeteo:KelasStasiun .
+stmeteo:III a stmeteo:KelasStasiun .
+
+stmeteo:BalaiBesar a rdfs:Class .
+stmeteo:iii a stmeteo:BalaiBesar .
+
+stmeteo:StasiunMeteorologi a rdfs:Class.
+stmeteo:bernama a rdf:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range xsd:String .
+stmeteo:berkelas a rdfs:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range stmeteo:KelasStasiun .
+stmeteo:berbalai a rdfs:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range stmeteo:BalaiBesar .
+stmeteo:beralamat a rdf:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range xsd:String .
+stmeteo:berada a rdfs:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range dbpedia-id:Village .
+stmeteo:berlokasi a rdfs:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range geo:point .
+stmeteo:email a rdfs:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range xsd:String .
+stmeteo:telephone a rdfs:Property;
+	rdfs:domain stmeteo:StasiunMeteorologi;
+	rdfs:range xsd:String .
+	
+stmeteo:refTahun  a rdf:Property, qb:DimensionProperty;
+    rdfs:label "reference tahun"@en;
+    rdfs:subPropertyOf sdmx-dimension:refPeriod;
+    rdfs:range xsd:gYear;
+    qb:concept sdmx-concept:refPeriod . 
+stmeteo:refBulan  a rdf:Property, qb:DimensionProperty;
+    rdfs:label "reference bulan"@en;
+    rdfs:subPropertyOf sdmx-dimension:refPeriod;
+    rdfs:range xsd:gMonth;
+    qb:concept sdmx-concept:refPeriod . 
+stmeteo:refStasiun a rdf:Property, qb:DimensionProperty;
+	rdfs:label "reference stasiun meteorologi"@en;
+	rdfs:range stmeteo:StasiunMeteorologi;
+	qb:concept sdmx-concept:contactOrganisation . 
+
+stmeteo:ArahAngin  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "arah angin"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer . 
+stmeteo:KecepatanAngin  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "kecepatan angin"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal . 
+stmeteo:ArahAnginMax  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "arah angin maksimum"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer .
+stmeteo:KecepatanAnginMax  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "kecepatan angin maksimum"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal .
+stmeteo:JamAnginMax  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "jam angin maksimum berhembus"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:time .
+stmeteo:TanggalAnginMax  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "tanggal angin maksimum berhembus"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:gDate .
+stmeteo:HariHujan  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "jumlah hari hujan"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer .
+stmeteo:CurahHujan  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "curah hujan"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal .
+stmeteo:Kelembapan  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "kelembapan"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:integer .
+stmeteo:TekananUdara  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "tekanan udara"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal .
+stmeteo:Teperatur  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "temperatur"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal .
+stmeteo:PenyinaranMatahari  a rdf:Property, qb:MeasureProperty;
+    rdfs:label "penyinaran matahari"@en;
+    rdfs:subPropertyOf sdmx-measure:obsValue;
+    rdfs:range xsd:decimal .
+	
+stmeteo:Data a qb:DataStructureDefinition;
+    qb:component 
+        [ qb:dimension  stmeteo:refTahun; ],
+        [ qb:dimension  stmeteo:refBulan; ],
+        [ qb:dimension  stmeteo:refStasiun; ],
+        [ qb:measure    stmeteo:ArahAngin; ],
+        [ qb:measure    stmeteo:KecepatanAngin; ],
+        [ qb:measure    stmeteo:ArahAnginMax; ],
+        [ qb:measure    stmeteo:KecepatanAnginMax; ],
+        [ qb:measure    stmeteo:JamAnginMax; ],
+        [ qb:measure    stmeteo:TanggalAnginMax; ],
+        [ qb:measure    stmeteo:HariHujan; ],
+        [ qb:measure    stmeteo:CurahHujan; ],
+        [ qb:measure    stmeteo:Kelembapan; ],
+        [ qb:measure    stmeteo:TekananUdara; ],
+        [ qb:measure    stmeteo:Teperatur; ],
+        [ qb:measure    stmeteo:PenyinaranMatahari; ] . 
+
+stmeteo:Juanda a stmeteo:StasiunMeteorologi;
+	stmeteo:bernama "Stasiun Meteorologi Juanda";
+	stmeteo:berkelas stmeteo:I;
+	stmeteo:berbalai stmeteo:iii;
+	stmeteo:beralamat "Jl. Bandar Udara Juanda Surabaya";
+	stmeteo:berada <http://id.dbpedia.org/resource/Pranti,_Sedati,_Sidoarjo>;
+	stmeteo:berlokasi "(112.783889 -7.384167)"^^geo:point;
+	stmeteo:email "meteojuanda@gmail.com";
+	stmeteo:email "stamet.juanda@bmkg.go.id";
+	stmeteo:telephone "(031)8667540";
+	stmeteo:telephone "(031)8675342" .
+	
+stmeteo:Perak1 a stmeteo:StasiunMeteorologi;
+	stmeteo:bernama "Stasiun Meteorologi Perak  I";
+	stmeteo:berkelas stmeteo:III;
+	stmeteo:berbalai stmeteo:iii;
+	stmeteo:beralamat "Jl. Tjg. Sadari Colombo No.78";
+	stmeteo:berada <http://id.dbpedia.org/resource/Perak_Barat,_Krembangan,_Surabaya>;
+	stmeteo:berlokasi "(112.723889 -7.223611)"^^geo:point;
+	stmeteo:email "peraksatu@cuacaperak.info";
+	stmeteo:email "stamet.perak1@bmkg.go.id";
+	stmeteo:telephone "(031)3541430";
+	stmeteo:telephone "(031)3557801" .
+	
+stmeteo:Perak2 a stmeteo:StasiunMeteorologi;
+	stmeteo:bernama "Stasiun Meteorologi Perak  II";
+	stmeteo:berkelas stmeteo:II;
+	stmeteo:berbalai stmeteo:iii;
+	stmeteo:beralamat "Jl. Kalimas Baru 97-B";
+	stmeteo:berada <http://id.dbpedia.org/resource/Perak_Utara,_Pabean_Cantikan,_Surabaya>;
+	stmeteo:berlokasi "(112.735278 -7.205278)"^^geo:point;
+	stmeteo:email "meteomaritimsby@yahoo.co.id";
+	stmeteo:email "stamet.perak2@bmkg.go.id";
+	stmeteo:telephone "(031)3291439";
+	stmeteo:telephone "(031)3287123" .
+	
+stmeteo:ds0 a qb:DataSet;
+    qb:structure stmeteo:Data .
+    
+stmeteo:obss00  a qb:Observation;
+    qb:dataSet stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "01"^^xsd:gMonth;
+	stmeteo:ArahAngin 270;
+	stmeteo:KecepatanAngin 8.7;
+	stmeteo:ArahAnginMax 280;
+	stmeteo:KecepatanAnginMax 22;
+	stmeteo:JamAnginMax "14:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "11"^^xsd:gDate;
+	stmeteo:HariHujan 25;
+	stmeteo:CurahHujan 364.9;
+	stmeteo:Kelembapan 92;
+	stmeteo:TekananUdara 1009.3;
+	stmeteo:Teperatur 27.6;
+	stmeteo:PenyinaranMatahari 48.8 .
+
+stmeteo:obs00 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "01"^^xsd:gMonth;
+	stmeteo:ArahAngin 270;
+	stmeteo:KecepatanAngin 8.7;
+	stmeteo:ArahAnginMax 280;
+	stmeteo:KecepatanAnginMax 22;
+	stmeteo:JamAnginMax "14:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "11"^^xsd:gDate;
+	stmeteo:HariHujan 25;
+	stmeteo:CurahHujan 364.9;
+	stmeteo:Kelembapan 92;
+	stmeteo:TekananUdara 1009.3;
+	stmeteo:Teperatur 27.6;
+	stmeteo:PenyinaranMatahari 48.8 .
+	
+stmeteo:obs01 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "02"^^xsd:gMonth;
+	stmeteo:ArahAngin 270;
+	stmeteo:KecepatanAngin 7.1;
+	stmeteo:ArahAnginMax 240;
+	stmeteo:KecepatanAnginMax 20;
+	stmeteo:JamAnginMax "17:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "28"^^xsd:gDate;
+	stmeteo:HariHujan 20;
+	stmeteo:CurahHujan 287;
+	stmeteo:Kelembapan 82;
+	stmeteo:TekananUdara 1008.8;
+	stmeteo:Teperatur 27.8;
+	stmeteo:PenyinaranMatahari 47.1 .
+	
+stmeteo:obs02 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "03"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 6.9;
+	stmeteo:ArahAnginMax 290;
+	stmeteo:KecepatanAnginMax 20;
+	stmeteo:JamAnginMax "12:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "5"^^xsd:gDate;
+	stmeteo:HariHujan 28;
+	stmeteo:CurahHujan 461.1;
+	stmeteo:Kelembapan 83;
+	stmeteo:TekananUdara 1010.1;
+	stmeteo:Teperatur 27.8;
+	stmeteo:PenyinaranMatahari 67.6 .
+	
+stmeteo:obs03 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "04"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 6;
+	stmeteo:ArahAnginMax 50;
+	stmeteo:KecepatanAnginMax 14;
+	stmeteo:JamAnginMax "15:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "1"^^xsd:gDate;
+	stmeteo:HariHujan 19;
+	stmeteo:CurahHujan 140.8;
+	stmeteo:Kelembapan 82;
+	stmeteo:TekananUdara 1009.5;
+	stmeteo:Teperatur 28.3;
+	stmeteo:PenyinaranMatahari 54 .
+	
+stmeteo:obs04 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "05"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 6;
+	stmeteo:ArahAnginMax 70;
+	stmeteo:KecepatanAnginMax 15;
+	stmeteo:JamAnginMax "14:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "6"^^xsd:gDate;
+	stmeteo:HariHujan 21;
+	stmeteo:CurahHujan 195.8;
+	stmeteo:Kelembapan 83;
+	stmeteo:TekananUdara 1010;
+	stmeteo:Teperatur 28.1;
+	stmeteo:PenyinaranMatahari 52 .
+	
+stmeteo:obs05 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "06"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 6.2;
+	stmeteo:ArahAnginMax 40;
+	stmeteo:KecepatanAnginMax 20;
+	stmeteo:JamAnginMax "03:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "13"^^xsd:gDate;
+	stmeteo:HariHujan 21;
+	stmeteo:CurahHujan 239.5;
+	stmeteo:Kelembapan 85;
+	stmeteo:TekananUdara 1009.1;
+	stmeteo:Teperatur 27;
+	stmeteo:PenyinaranMatahari 44 .
+	
+stmeteo:obs06 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "07"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 7.5;
+	stmeteo:ArahAnginMax 110;
+	stmeteo:KecepatanAnginMax 20;
+	stmeteo:JamAnginMax "20:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "2"^^xsd:gDate;
+	stmeteo:HariHujan 10;
+	stmeteo:CurahHujan 109.2;
+	stmeteo:Kelembapan 79;
+	stmeteo:TekananUdara 1010.5;
+	stmeteo:Teperatur 26.3;
+	stmeteo:PenyinaranMatahari 57.7 .
+	
+stmeteo:obs07 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "08"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 7.6;
+	stmeteo:ArahAnginMax 100;
+	stmeteo:KecepatanAnginMax 18;
+	stmeteo:JamAnginMax "18:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "18"^^xsd:gDate;
+	stmeteo:HariHujan 1;
+	stmeteo:CurahHujan 0.6;
+	stmeteo:Kelembapan 72;
+	stmeteo:TekananUdara 1012.2;
+	stmeteo:Teperatur 26.3;
+	stmeteo:PenyinaranMatahari 94.6 .
+	
+stmeteo:obs08 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "09"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 7.6;
+	stmeteo:ArahAnginMax 90;
+	stmeteo:KecepatanAnginMax 20;
+	stmeteo:JamAnginMax "15:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "2"^^xsd:gDate;
+	stmeteo:HariHujan 1;
+	stmeteo:CurahHujan 0.2;
+	stmeteo:Kelembapan 69;
+	stmeteo:TekananUdara 1012.1;
+	stmeteo:Teperatur 27.7;
+	stmeteo:PenyinaranMatahari 92.5 .
+	
+stmeteo:obs09 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "10"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 7;
+	stmeteo:ArahAnginMax 110;
+	stmeteo:KecepatanAnginMax 15;
+	stmeteo:JamAnginMax "15:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "16"^^xsd:gDate;
+	stmeteo:HariHujan 2;
+	stmeteo:CurahHujan 3.6;
+	stmeteo:Kelembapan 66;
+	stmeteo:TekananUdara 1012.1;
+	stmeteo:Teperatur 29.4;
+	stmeteo:PenyinaranMatahari 91.3 .
+	
+stmeteo:obs10 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "11"^^xsd:gMonth;
+	stmeteo:ArahAngin 90;
+	stmeteo:KecepatanAngin 7;
+	stmeteo:ArahAnginMax 250;
+	stmeteo:KecepatanAnginMax 19;
+	stmeteo:JamAnginMax "16:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "17"^^xsd:gDate;
+	stmeteo:HariHujan 14;
+	stmeteo:CurahHujan 108;
+	stmeteo:Kelembapan 75;
+	stmeteo:TekananUdara 1009.5;
+	stmeteo:Teperatur 28.7;
+	stmeteo:PenyinaranMatahari 40.6 .
+	
+stmeteo:obs11 a qb:Observation;
+	qb:dataSet  stmeteo:ds0;
+    stmeteo:refTahun "2013"^^xsd:gYear;
+	stmeteo:refStasiun stmeteo:Juanda;
+	stmeteo:refBulan "12"^^xsd:gMonth;
+	stmeteo:ArahAngin 270;
+	stmeteo:KecepatanAngin 7;
+	stmeteo:ArahAnginMax 280;
+	stmeteo:KecepatanAnginMax 28;
+	stmeteo:JamAnginMax "13:00"^^xsd:time;
+	stmeteo:TanggalAnginMax "30"^^xsd:gDate;
+	stmeteo:HariHujan 20;
+	stmeteo:CurahHujan 359.3;
+	stmeteo:Kelembapan 82;
+	stmeteo:TekananUdara 1008.9;
+	stmeteo:Teperatur 27.6;
+	stmeteo:PenyinaranMatahari 51.2 .
+	
